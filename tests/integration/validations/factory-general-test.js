@@ -694,13 +694,15 @@ module('Integration | Validations | Factory - General', function(hooks) {
   });
 
   test('disabled validations - cp with dependent key', function(assert) {
-    let Validations = buildValidations({
-      firstName: validator('inline', { validate: Validators.presence }),
-      lastName: validator('inline', {
-        validate: Validators.presence,
-        disabled: not('model.validateLastName')
-      })
-    });
+    let Validations = buildValidations(
+      {
+        firstName: validator('inline', { validate: Validators.presence }),
+        lastName: validator('inline', {
+          validate: Validators.presence,
+          disabled: not('model.validateLastName')
+        })
+      }
+    );
     let object = setupObject(
       this,
       EmberObject.extend(Validations, {

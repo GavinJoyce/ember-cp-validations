@@ -54,10 +54,6 @@ export function isObject(o) {
   return typeOf(o) === 'object' || typeOf(o) === 'instance';
 }
 
-export function isDescriptor(o) {
-  return o && typeof o === 'object' && o.isDescriptor;
-}
-
 export function isValidatable(value) {
   let v = unwrapProxy(value);
   return isDsModel(v) ? !get(v, 'isDeleted') : true;

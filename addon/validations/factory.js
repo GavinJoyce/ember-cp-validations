@@ -10,6 +10,7 @@ import { isEmpty, isNone } from '@ember/utils';
 import { getOwner } from '@ember/application';
 import deepSet from '../utils/deep-set';
 import ValidationResult from '../-private/result';
+import { getDependantKeys, isDescriptor } from '../-private/ember-internals';
 import ResultCollection from './result-collection';
 import BaseValidator from '../validators/base';
 import cycleBreaker from '../utils/cycle-breaker';
@@ -20,7 +21,6 @@ import {
   isDsModel,
   isValidatable,
   isPromise,
-  isDescriptor,
   mergeOptions
 } from '../utils/utils';
 import {
@@ -653,7 +653,7 @@ function extractOptionsDependentKeys(options) {
       let option = options[key];
 
       if (isDescriptor(option)) {
-        return arr.concat(option._dependentKeys || []);
+        return arr.concat(getDependantKeys(option) || []);
       }
 
       return arr;
